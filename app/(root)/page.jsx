@@ -1,8 +1,11 @@
-
-import { Heart } from "iconsax-reactjs";
+import { Gallery, Heart } from "iconsax-reactjs";
 import CardComponent from "@/components/card/CardComponent";
-import { cardData } from "@/asset/data/card-data";
-export default function Home() {
+
+export default async function Home() {
+  const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date");
+  // console.log(res)
+  const data = await res.json();
+  // console.log(data.payload);
   return (
     <>
       <div className="flex flex-col px-24 gap-12">
@@ -65,8 +68,6 @@ export default function Home() {
           </section>
         </div>
 
-     
-
         <div className="w-full flex items-center gap-4">
           <Heart size="32" color="#309898" variant="Bold" />
           <h1 className="text-[32px]">
@@ -76,21 +77,13 @@ export default function Home() {
         </div>
 
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-          {cardData.map((data) => {
-            return (
-              <CardComponent
-                key={data.id}
-                title={data.title}
-                date={data.date}
-                desc={data.desc}
-                image={data.image}
-              />
-            );
-          })}
+         {data.payload?.map((card)=>{
+          return(
+            <CardComponent key={card.id} gallery={card.gallery} location={card.location} date={card.date} details={card.details}/>
+          )
+         })}
         </main>
-
       </div>
-      
     </>
   );
 }
