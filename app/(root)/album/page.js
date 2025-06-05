@@ -12,9 +12,10 @@ import { NoteText } from "iconsax-reactjs";
 import TableComponent from "./_components/TableComponent";
 import { Button } from "@/components/ui/button";
 import { Add } from "iconsax-reactjs";
-const AlbumPage = () => (
-  <>
-    <section className="flex items-center justify-between py-5 px-24 gap-2">
+const AlbumPage = () => {
+  return (
+    <>
+          <section className="flex items-center justify-between py-5 px-24 gap-2">
       <div className="flex items-center gap-2">
         <Calendar size="32" color="#309898" variant="Broken" />
         <u>
@@ -97,6 +98,8 @@ const AlbumPage = () => (
       </div>
     </section>
     <TableComponent />
-  </>
-);
+    </>
+  );
+};
 export default AlbumPage;
+

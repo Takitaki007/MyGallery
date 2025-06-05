@@ -77,11 +77,17 @@ export default async function Home() {
         </div>
 
         <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-         {data.payload?.map((card)=>{
-          return(
-            <CardComponent key={card.id} gallery={card.gallery} location={card.location} date={card.date} details={card.details}/>
-          )
-         })}
+          {data.payload?.map((card) => {
+            return (
+              <CardComponent
+                key={card.id}
+                gallery={card.gallery}
+                location={card.location}
+                date={card.date}
+                details={card.details}
+              />
+            );
+          })}
         </main>
       </div>
     </>
