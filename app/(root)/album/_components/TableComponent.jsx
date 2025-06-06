@@ -4,17 +4,17 @@ import { Edit } from "iconsax-reactjs";
 import { Trash } from "iconsax-reactjs";
 const TableComponent = ({id,location,date,status,details}) => {
   return (
-    <div className="px-20">
+    <div>
 
-    <table className="min-w-full divide-y divide-gray-200">
-      <tbody className="bg-white divide-y divide-gray-200">
-        <tr>
-          <td className="px-6 py-4 whitespace-nowrap"><Checkbox /> {id}</td>
-          <td className="px-6 py-4 whitespace-nowrap">{location}</td>
-          <td className="px-6 py-4 whitespace-nowrap">{date}</td>
-          <td className="px-6 py-4 whitespace-nowrap">{details}</td>
-          <td className="px-6 py-4 whitespace-nowrap">
-            <span className=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-white drop-shadow-lg text-yellow-500">
+    <table className="min-w-full divide-y ml-6 divide-gray-200">
+      <tbody className="bg-yellow-100">
+        <tr className="flex gap-40">
+          <td className="py-4  whitespace-nowrap"><Checkbox /> {id}</td>
+          <td className="py-4 whitespace-nowrap">{location}</td>
+          <td className="py-4 whitespace-nowrap">{date}</td>
+          <td className="py-4 whitespace-nowrap">{details}</td>
+          <td className="py-4 whitespace-nowrap">
+            <span className="  inline-flex text-xs leading-5 font-semibold rounded-full  bg-white drop-shadow-lg text-yellow-500">
               {status}
             </span>
           </td>
