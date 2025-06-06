@@ -1,3 +1,4 @@
+
 import {
   Dialog,
   DialogClose,
@@ -12,7 +13,15 @@ import { NoteText } from "iconsax-reactjs";
 import TableComponent from "./_components/TableComponent";
 import { Button } from "@/components/ui/button";
 import { Add } from "iconsax-reactjs";
-const AlbumPage = () => {
+import { Checkbox } from "@/components/ui/checkbox";
+const AlbumPage = async () => {
+  const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date");
+  const data = await res.json();
+  async function InputHandler(userInput){
+    "use server"
+    console.log("user input :",userInput)
+  }
+  // console.log(data.paylaod)
   return (
     <>
           <section className="flex items-center justify-between py-5 px-24 gap-2">
@@ -39,7 +48,7 @@ const AlbumPage = () => {
                   Create New Schedule
                 </DialogTitle>
                 <div className="w-full">
-                  <form className="p-5">
+                  <form className="p-5" action={InputHandler}>
                     <label
                       className="flex items-center gap-2"
                       htmlFor="location"
@@ -52,6 +61,7 @@ const AlbumPage = () => {
                       className="bg-[#F8FAFC] rounded-md p-2 w-full"
                       type="text"
                       id="location"
+                      name="location"
                       placeholder="Enter your desired places"
                     ></input>
                     <br></br>
@@ -63,6 +73,7 @@ const AlbumPage = () => {
                     </label>
                     <br></br>
                     <input
+                    name="date"
                       type="text"
                       className="bg-[#F8FAFC] rounded-md p-2 w-full"
                       id="date"
@@ -79,25 +90,60 @@ const AlbumPage = () => {
                     </label>
                     <br></br>
                     <textarea
+                    name="details"
                       type="text"
                       id="details"
                       className="bg-[#F8FAFC] rounded-md p-2 w-full h-[150px]"
                       placeholder="type some details"
                     ></textarea>
+                     <div className="px-5">
+                
+                  <button type="submit" className="bg-teal-500 w-full">Create</button>
+     
+              </div>
                   </form>
                 </div>
               </DialogHeader>
-              <div className="px-5">
-                
-                  <Button className="bg-teal-500 w-full">Create</Button>
-       
-              </div>
+             
             </DialogContent>
           </Dialog>
         </div>
       </div>
     </section>
-    <TableComponent />
+    {/* <table className="min-w-full divide-y divide-gray-200">
+        <thead>
+
+ <tr>
+          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 tracking-wider">
+            <Checkbox/> No
+          </th>
+          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+            Where we are going
+          </th>
+          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+            Date
+          </th>
+          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+            What we plan to do
+          </th>
+          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
+            Status
+          </th>
+          <th className="px-6 py-3 text-center text-md font-medium text-gray-500 uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+
+    </table> */}
+       
+    {data.payload?.map((table)=>{
+      return(
+    <TableComponent key={table.id} location={table.location} 
+    details={table.details} status={table.status} id={table.id}
+    />
+      )
+    })}
     </>
   );
 };

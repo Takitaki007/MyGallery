@@ -2,42 +2,20 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Eye } from "iconsax-reactjs";
 import { Edit } from "iconsax-reactjs";
 import { Trash } from "iconsax-reactjs";
-const TableComponent = () => {
+const TableComponent = ({id,location,date,status,details}) => {
   return (
     <div className="px-20">
 
     <table className="min-w-full divide-y divide-gray-200">
-      <thead>
-        <tr>
-          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 tracking-wider">
-            <Checkbox /> No
-          </th>
-          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-            Where we are going
-          </th>
-          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-            Date
-          </th>
-          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-            What we plan to do
-          </th>
-          <th className="px-6 py-3 text-left text-md font-medium text-gray-500 uppercase tracking-wider">
-            Status
-          </th>
-          <th className="px-6 py-3 text-center text-md font-medium text-gray-500 uppercase tracking-wider">
-            Actions
-          </th>
-        </tr>
-      </thead>
       <tbody className="bg-white divide-y divide-gray-200">
         <tr>
-          <td className="px-6 py-4 whitespace-nowrap"><Checkbox /> 1</td>
-          <td className="px-6 py-4 whitespace-nowrap">Paris</td>
-          <td className="px-6 py-4 whitespace-nowrap">15 Jan, 2027</td>
-          <td className="px-6 py-4 whitespace-nowrap">Visit the Eiffel Tower</td>
+          <td className="px-6 py-4 whitespace-nowrap"><Checkbox /> {id}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{location}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{date}</td>
+          <td className="px-6 py-4 whitespace-nowrap">{details}</td>
           <td className="px-6 py-4 whitespace-nowrap">
             <span className=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-white drop-shadow-lg text-yellow-500">
-              ongoing
+              {status}
             </span>
           </td>
           <td className="px-6 py-4 whitespace-nowrap">
@@ -55,7 +33,7 @@ const TableComponent = () => {
             </div>
           </td>
         </tr>
-            <tr>
+            {/* <tr>
           <td className="px-6 py-4 whitespace-nowrap"><Checkbox /> 2</td>
           <td className="px-6 py-4 whitespace-nowrap">Cambodia</td>
           <td className="px-6 py-4 whitespace-nowrap">15 Jan, 2027</td>
@@ -154,7 +132,7 @@ const TableComponent = () => {
               </button>
             </div>
           </td>
-        </tr>
+        </tr> */}
       </tbody>
     </table>
     </div>

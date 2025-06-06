@@ -5,7 +5,7 @@ export default async function Home() {
   const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date");
   // console.log(res)
   const data = await res.json();
-  // console.log(data.payload);
+  console.log(data.payload);
   return (
     <>
       <div className="flex flex-col px-24 gap-12">
