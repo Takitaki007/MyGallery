@@ -2,7 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Eye } from "iconsax-reactjs";
 import { Edit } from "iconsax-reactjs";
 import { Trash } from "iconsax-reactjs";
-const TableComponent = ({id,location,date,status,details}) => {
+const TableComponent = ({id,location,date,details,status}) => {
   return (
     <div>
 

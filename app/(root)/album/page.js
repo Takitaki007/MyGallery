@@ -13,27 +13,34 @@ import TableComponent from "./_components/TableComponent";
 import { Button } from "@/components/ui/button";
 import { Add } from "iconsax-reactjs";
 import { Checkbox } from "@/components/ui/checkbox";
+import { AppleIcon, Type } from "lucide-react";
+import { Content } from "next/font/google";
+import { insertUser } from "@/service/user.service";
 const AlbumPage = async () => {
   //fetch data
   const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date");
   const data = await res.json();
-  //catch input value
+  // console.log("data with payloard",data.payload);
+
+  // 2. Handle form submission
   async function InputHandler(userInput) {
     "use server";
-    // console.log("user input :",userInput)
-    //define object structure
+
     const newUser = {
       location: userInput.get("location"),
       date: userInput.get("date"),
       details: userInput.get("details"),
+      gallery:
+        "http://96.9.81.187:8085/api/v1/file/preview-file/38fa32e5-ee2b-4ed4-864a-fc7cba44bfdb.jpg", // use default or uploaded image
+      status: userInput.get("status"),
     };
-    console.log(newUser);
-  }
-  //cover the object to json for post
-  const insertUser = async (userData) => {
-    const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date");
-  };
 
+    console.log("Form submitted:", newUser);
+
+    // call user service
+    const result = await insertUser(newUser);
+    console.log("Server response:", result);
+  }
   return (
     <>
       <section className="flex items-center justify-between py-5 px-24 gap-2">
@@ -171,6 +178,7 @@ const AlbumPage = async () => {
               <td className="px-6 py-4 whitespace-nowrap">
                 <span className="inline-flex text-xs leading-5 font-semibold rounded-full bg-white drop-shadow-lg text-yellow-500">
                   {table.status}
+                  {/* padding */}
                 </span>
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
@@ -196,4 +204,5 @@ const AlbumPage = async () => {
     </>
   );
 };
+
 export default AlbumPage;
