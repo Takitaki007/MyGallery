@@ -16,11 +16,35 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { AppleIcon, Type } from "lucide-react";
 import { Content } from "next/font/google";
 import { insertUser } from "@/service/user.service";
+import { revalidateTag } from "next/cache";
+import { use } from "react";
 const AlbumPage = async () => {
-  //fetch data
-  const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date");
-  const data = await res.json();
+  //fetch all data 
+  const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date?pageSize=5&sortBy=id&sortDirection=ASC",
+    {
+      cache:"no-store",
+      next:{tags:['user']}
+    }
+  );
+  console.log(res)
+  // const data = await res.json();
   // console.log("data with payloard",data.payload);
+
+
+const insertUser = async (userData) => {
+  "use server";
+
+  const res = await fetch("http://96.9.81.187:8085/api/v1/romantic-date", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6W10sInN1YiI6InJlbmRlckBnbWFpbC5jb20iLCJpYXQiOjE3NDkyMzUzMzksImV4cCI6MTc0OTMyMTczOX0.xwnYpTAsyTdEHYVL5gPY9BoamgS8JZWCyf6Bh6RMiRrLBSgsC-lqLzjT4hR9cddJzXioj37H8FHgFx5EsWIavA" // Use correct token
+    },
+    body: JSON.stringify(userData),
+  });
+  const data = res.json();
+  return data;
+};
 
   // 2. Handle form submission
   async function InputHandler(userInput) {
@@ -37,9 +61,12 @@ const AlbumPage = async () => {
 
     console.log("Form submitted:", newUser);
 
-    // call user service
+    // call user service for inset new user
     const result = await insertUser(newUser);
     console.log("Server response:", result);
+
+    //calling revaldate tage
+    revalidateTag("user")
   }
   return (
     <>
